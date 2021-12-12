@@ -22,33 +22,49 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
     final _questions = const [
       {'questionText': 'How tall is Mount Everest?',
-      'answers': [
-        '3 210 m',
-        '29 m',
-        '8 850 m',
-        '8 580 m'
+      'answers': [{
+        'text': '3 210 m',
+        'score': 0},
+        {'text': '29 m',
+        'score': 0},
+        {'text': '8 850 m',
+        'score': 1},
+        {'text': '8 580 m',
+        'score': 0}
         ],
         }, 
       {'questionText': 'How many cats are registered in Norway?',
       'answers': [
-        '600 000',
-        '500 000',
-        '1 000 000',
-        '700 000'
+        {'text': '600 000',
+        'score': 0},
+        {'text': '500 000',
+        'score': 0},
+        {'text': '1 000 000',
+        'score': 0},
+        {'text': '700 000',
+        'score': 1}
         ],
         },
       {'questionText': 'Which statement is true?',
       'answers': [
-        'Santa Claus is real',
-        'Mahatma Gandhi was actually quite nice',
-        'Gary Goodspeed is a real person',
-        'Blue and yellow mixed gives you pink'
+        {'text': 'Santa Claus is real',
+        'score': 0},
+        {'text': 'Mahatma Gandhi was actually quite nice',
+        'score': 1},
+        {'text': 'Gary Goodspeed is a real person',
+        'score': 0},
+        {'text': 'Blue and yellow mixed gives you pink',
+        'score': 0}
         ],
         }, 
     ];
   var _questionIndex = 0;
+  var _totalScore = 0;
 
-  void _answerQuestion() {
+  void _answerQuestion(int score) {
+
+    _totalScore += score;
+
     if (_questionIndex < _questions.length) {
      setState(() {
      _questionIndex = _questionIndex + 1;     
@@ -79,7 +95,7 @@ class _MyAppState extends State<MyApp> {
           questionIndex: _questionIndex, 
           questions: _questions,
           )
-    : Result()
+    : Result(_totalScore)
       ),
     );
   }
